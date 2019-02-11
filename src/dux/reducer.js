@@ -2,7 +2,7 @@ const initialState = {
     monthly: [
         {
             month: 'January',
-            count: 100
+            count: 30
         },
         {
             month: 'February',
@@ -15,9 +15,29 @@ const initialState = {
     ]
 };
 
+const UPDATE_JAN = 'UPDATE_JAN'
+
 export default function(state = initialState, action) {
   switch (action.type) {
+    
+    // case UPDATE_JAN:
+    //     return{...state, monthly: action.payload}
+    case UPDATE_JAN:
+        return {...state, monthly: state.monthly.map(e => {
+            if(e.month === 'January'){
+                return{...e, count: action.payload}
+            } else {
+                return {...e}
+            }
+        })}
     default:
       return state;
   }
+}
+
+export function january(jan){
+    return{
+        type: UPDATE_JAN,
+        payload: jan
+    }
 }
